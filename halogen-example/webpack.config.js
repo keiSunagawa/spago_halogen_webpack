@@ -30,19 +30,21 @@ module.exports = {
     publicPath: appConfig.public_path
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.purs$/,
-        loader: 'purs-loader',
-        exclude: /node_modules/,
-        query: isProd ? {
-          bundle: true,
-          bundleOutput: 'static/dist/bundle.js'
-        } : {
-          psc: 'psa',
-          pscIde: true,
-          spago: true
-        }
+        use: {
+          loader: 'purs-loader',
+          query: isProd ? {
+            bundle: true,
+            bundleOutput: 'static/dist/bundle.js'
+          } : {
+            psc: 'psa',
+            pscIde: true,
+            spago: true
+          }
+        },
+        exclude: /node_modules/
       }
     ],
   },
